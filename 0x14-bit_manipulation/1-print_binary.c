@@ -17,10 +17,10 @@
 */
 void debug_1(unsigned long int n, int length, unsigned long int mask)
 {
-	printf("Length of %lu (n) is %i ", n, (length + 1));
-	printf("and mask (original value 1) ");
-	printf("is %lu based ", mask);
-	printf("on [length of n - 1] == %i.\n\n", length);
+	_putchar("Length of %lu (n) is %i ", n, (length + 1));
+	_putchar("and mask (original value 1) ");
+	_putchar("is %lu based", mask);
+	_putchar("on [length of n - 1] == %i.\n\n", length);
 }
 
 
@@ -30,13 +30,13 @@ void debug_1(unsigned long int n, int length, unsigned long int mask)
  * @n: value of n
  * @mask: mask of n
  *
- * Return: nothing
+* Return: nothing
 */
 void debug_2(unsigned long int n, unsigned long int mask)
 {
-	printf("Value of n is %lu, ", n);
-	printf("value of mask is %lu and ", mask);
-	printf("value of [n & mask] is %lu.\n\n", (n & mask));
+	_putchar("Value of n is %lu, ", n);
+	_putchar("value of mask is %lu and ", mask);
+	_putchar("value of [n & mask] is %lu.\n\n", (n & mask));
 }
 
 /**
@@ -48,7 +48,7 @@ void debug_2(unsigned long int n, unsigned long int mask)
 */
 void debug_3(unsigned long int mask)
 {
-	printf("\nValue of mask is %lu after right shifting by one.\n\n", mask);
+	_putchar("\nValue of mask is %lu after right shifting by one.\n\n", mask);
 }
 
 /**
@@ -65,14 +65,14 @@ int _length(unsigned long int n)
 	while (n > 0)
 	{
 		#ifdef DEBUG
-		printf("Value of n is %lu before right shifting by one.\n\n", n);
+		_putchar("Value of n is %lu before right shifting by one.\n\n", n);
 		#endif
 
 		length++;
 		n >>= 1; /*shift n to the right by 1*/
 
 		#ifdef DEBUG
-		printf("Value of n is %lu after right shifting by one.\n\n", n);
+		_putchar("Value of n is %lu after right shifting by one.\n\n", n);
 		#endif
 	}
 
