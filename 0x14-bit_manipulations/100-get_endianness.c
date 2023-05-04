@@ -1,7 +1,7 @@
 /**
- * get_endianness - a function that checks if
- *                  architecture is little endian
- *                  or big endian
+ * get_endianness - a function that check if
+ *                  architecture is little Endian
+ *                  or big Endian
  *
  * Return: 1 if little endian or 0 if big endian
 */
