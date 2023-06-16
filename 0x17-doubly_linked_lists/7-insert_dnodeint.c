@@ -1,54 +1,48 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "lists.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-dlistint_t *create_dnode(int n, dlistint_t *prev, dlistint_t *next)
+/**
+ * insert_dnodeint_at_index - inserts a new node at a given position
+ * @h: double pointer to the beginning of the linked list
+ * @idx: index at which to insert the new node
+ * @n: data to enter into new node
+ *
+ * Return: pointer to the new node, or NULL on failure
+ */
+dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
-	dlistint_t *new;
+	dlistint_t *new, *next, *current;
+	unsigned int i;
 
+	if (h == NULL)
+		return (NULL);
+	if (idx != 0)
+	{
+		current = *h;
+		for (i = 0; i < idx - 1 && current != NULL; i++)
+			current = current->next;
+		if (current == NULL)
+			return (NULL);
+	}
 	new = malloc(sizeof(dlistint_t));
 	if (new == NULL)
 		return (NULL);
 	new->n = n;
-	new->prev = prev;
+	if (idx == 0)
+	{
+		next = *h;
+		*h = new;
+		new->prev = NULL;
+	}
+	else
+	{
+		new->prev = current;
+		next = current->next;
+		current->next = new;
+	}
 	new->next = next;
+	if (new->next != NULL)
+		new->next->prev = new;
 	return (new);
-}
-
-dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
-{
-	dlistint_t *curr = *h, *localPrev = NULL;
-	unsigned int count = 0;
-
-	if (!h)
-		return (NULL);
-	if (idx == 0) /* insert at list beginning*/
-	{
-		if (!*h)
-			*h = create_dnode(n, NULL, NULL); /*first node*/
-		else
-		{
-			(*h)->prev = create_dnode(n, NULL, *h);
-			*h = (*h)->prev;
-		}
-		return (*h);
-	}
-	for (curr = *h; curr && (count < idx); curr = curr->next, count++)
-	{
-		localPrev = curr;
-	}
-	if ((count == idx) && (curr == NULL)) /*insert at list end*/
-	{
-		localPrev->next = create_dnode(n, localPrev, NULL);
-		return (localPrev->next);
-	}
-	if ((count < idx) && (curr == NULL))/*idx too high*/
-		return (NULL);
-	if (localPrev != NULL)
-	{       /*insert in middle of list*/
-		localPrev->next = create_dnode(n, localPrev, curr);
-		curr->prev = localPrev->next;
-		return (localPrev->next);
-	}
-	return (NULL);
 }
